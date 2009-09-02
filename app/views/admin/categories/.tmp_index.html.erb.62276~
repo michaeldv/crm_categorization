@@ -1,0 +1,20 @@
+<h2>Listing categories</h2>
+
+<%= link_to 'New category', new_category_path %>
+
+<br />
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% @categories.each do |category| %>
+  <tr>
+    <td><%=h category.text %></td>
+    <td><%= link_to 'Show', category %></td>
+    <td><%= link_to 'Edit', edit_category_path(category) %></td>
+    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

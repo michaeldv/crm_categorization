@@ -1,0 +1,6 @@
+%br
+.subtitle#create_issue_title Categories
+.remote#create_issue{ hidden }
+.list#issues
+
+= collection_select get_category_model, get_category_model_ids, all_categories, :id, :long_name, { }, { :multiple => true, :size => '10' }

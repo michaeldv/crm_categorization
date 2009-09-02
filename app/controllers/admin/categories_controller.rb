@@ -1,11 +1,12 @@
-class CategoriesController < ApplicationController  
-  before_filter :set_current_tab, :only => [ :index, :show ]
+class Admin::CategoriesController < Admin::ApplicationController  
+  unloadable
+  before_filter :require_user
+  before_filter :set_current_tab
   
   # GET /categories
   # GET /categories.xml
   def index
-    @categories = Category.all
-    @all_categories = Category.find(:all, :order=>"parent_id, name")
+    @categories = CategoryAccount.all
     
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +18,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @category = Category.find(params[:id])
-    @all_categories = Category.find(:all, :order=>"parent_id, name")
+    @all_categories = Category.find(:all)
     
     respond_to do |format|
       format.html # show.html.erb
@@ -29,7 +30,7 @@ class CategoriesController < ApplicationController
   # GET /categories/new.xml
   def new
     @category = Category.new
-    @all_categories = Category.find(:all, :order=>"parent_id, name")
+    @all_categories = Category.find(:all)
     
     respond_to do |format|
       format.html # new.html.erb
@@ -40,14 +41,14 @@ class CategoriesController < ApplicationController
   # GET /categories/1/edit
   def edit
     @category = Category.find(params[:id])
-    @all_categories = Category.find(:all, :order=>"parent_id, name")
+    @all_categories = Category.find(:all)
   end
 
   # POST /categories
   # POST /categories.xml
   def create
     @category = Category.new(params[:category])
-    @all_categories = Category.find(:all, :order=>"parent_id, name")
+    @all_categories = Category.find(:all)
     
     respond_to do |format|
       if @category.save
@@ -65,7 +66,7 @@ class CategoriesController < ApplicationController
   # PUT /categories/1.xml
   def update
     @category = Category.find(params[:id])
-    @all_categories = Category.find(:all, :order=>"parent_id, name")
+    @all_categories = Category.find(:all)
     
     respond_to do |format|
       if @category.update_attributes(params[:category])
